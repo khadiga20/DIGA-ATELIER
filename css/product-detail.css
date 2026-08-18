@@ -1,0 +1,748 @@
+/* ==========================================
+   DIGA — Product Detail Editorial Experience
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&display=swap');
+
+:root {
+  --bg-color: #060508;
+  --bg-surface: #0e0c12;
+  --text-main: #f5f2eb;
+  --text-muted: #8e8a94;
+  --text-dim: #4e4a54;
+  --cream: #f4efe6;
+  --off-white: #faf7f2;
+
+  /* Restless Magenta Mood Signature Accents */
+  --mood-accent: #E0247D;
+  --mood-accent-glow: rgba(224, 36, 125, 0.45);
+  --mood-secondary: #7A22C4;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Barlow Condensed', -apple-system, sans-serif;
+  --container-padding: clamp(1.5rem, 5vw, 5rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  background: radial-gradient(circle at 75% 20%, rgba(224, 36, 125, 0.08) 0%, #060508 60%);
+}
+
+/* Atmospheric Glow Overlay */
+.pdp-ambient-glow {
+  position: fixed;
+  top: -10vw;
+  right: -10vw;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 36, 125, 0.15) 0%, transparent 70%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================
+   HEADER NAV
+   ========================================== */
+.pdp-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  padding: 0 var(--container-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+.pdp-header.scrolled {
+  background: rgba(6, 5, 8, 0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.brand-mini {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.25em;
+  color: var(--text-main);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+}
+
+.brand-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--mood-accent);
+  box-shadow: 0 0 10px var(--mood-accent);
+}
+
+.header-back {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.header-back:hover {
+  color: var(--off-white);
+}
+
+/* ==========================================
+   SECTION 1 — HERO SPLIT SCREEN
+   ========================================== */
+.hero-split {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  padding-top: 75px;
+  display: grid;
+  grid-template-columns: 62% 38%;
+  z-index: 10;
+}
+
+/* Left Hero Media Column */
+.hero-media-col {
+  position: relative;
+  height: calc(100vh - 75px);
+  overflow: hidden;
+  background: #030304;
+}
+
+.hero-media-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: contrast(108%);
+  transform: scale(1.02);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Soft Gradient Veil Lift Animation */
+.hero-veil-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--mood-secondary) 0%, var(--mood-accent) 40%, var(--bg-surface) 100%);
+  z-index: 5;
+  clip-path: inset(0 0 0 0);
+  animation: veil-lift-reveal 1.4s cubic-bezier(0.65, 0, 0.35, 1) forwards 0.2s;
+}
+
+@keyframes veil-lift-reveal {
+  0% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+/* Right Hero Info Column */
+.hero-info-col {
+  padding: 4rem 4vw 4rem 3vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(90deg, rgba(6, 5, 8, 0.5) 0%, rgba(6, 5, 8, 0.95) 100%);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mood-tag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mood-accent);
+  margin-bottom: 1.2rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid rgba(224, 36, 125, 0.3);
+  border-radius: 20px;
+  background: rgba(224, 36, 125, 0.06);
+  width: fit-content;
+}
+
+.product-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--off-white);
+  margin-bottom: 1rem;
+}
+
+.product-price {
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+
+.product-evocative-desc {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  border-left: 2px solid var(--mood-accent);
+  padding-left: 1rem;
+}
+
+/* Size Selector with Fabric Lift Hover */
+.size-selector-wrap {
+  margin-bottom: 2.5rem;
+}
+
+.selector-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.size-options {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.size-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.size-btn:hover {
+  transform: translateY(-5px);
+  /* Fabric lift animation */
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--mood-accent);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 12px var(--mood-accent-glow);
+}
+
+.size-btn.active {
+  background: var(--off-white);
+  color: #060508;
+  border-color: var(--off-white);
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Add To Cart CTA Button & Ripple Effect */
+.btn-add-to-cart {
+  position: relative;
+  width: 100%;
+  padding: 1.25rem 2rem;
+  background: var(--off-white);
+  color: #060508;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.btn-add-to-cart:hover {
+  background: var(--mood-accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px var(--mood-accent-glow);
+}
+
+.btn-add-to-cart .ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(0);
+  animation: button-ripple 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes button-ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Fabric Tag Toast Confirmation */
+.fabric-tag-toast {
+  position: fixed;
+  top: 90px;
+  right: -320px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: #120916;
+  border: 1px solid var(--mood-accent);
+  border-radius: 4px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px var(--mood-accent-glow);
+  transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fabric-tag-toast.show {
+  right: clamp(1rem, 3vw, 3rem);
+}
+
+.toast-icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--mood-accent);
+  box-shadow: 0 0 8px var(--mood-accent);
+}
+
+.toast-text {
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--off-white);
+}
+
+/* ==========================================
+   SECTION 2 — SCROLL TRIGGERED EDITORIAL SEQUENCE
+   ========================================== */
+.editorial-sequence-section {
+  padding: 8rem var(--container-padding);
+  background: var(--bg-color);
+}
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3rem;
+  align-items: center;
+}
+
+.editorial-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.editorial-item-1 {
+  grid-column: 1 / span 7;
+  height: 680px;
+}
+
+.editorial-item-2 {
+  grid-column: 8 / span 5;
+  height: 540px;
+  margin-top: 4rem;
+}
+
+/* Fabric Parallax Zoom Effect on Hover */
+.editorial-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.editorial-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(108%);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+}
+
+.editorial-texture-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(224, 36, 125, 0.15) 0%, transparent 60%);
+  mix-blend-mode: color-dodge;
+  opacity: 0.4;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.editorial-item:hover .editorial-img {
+  transform: scale(1.07);
+}
+
+.editorial-item:hover .editorial-texture-overlay {
+  transform: scale(1.12) translate(-10px, -10px);
+}
+
+/* ==========================================
+   SECTION 3 — "HOW IT MOVES" (SCROLL SCRUBBED VIDEO / MOTION)
+   ========================================== */
+.how-it-moves-section {
+  position: relative;
+  width: 100vw;
+  height: 180vh;
+  /* Gives scroll room for scrubbing */
+  background: #030204;
+}
+
+.moves-sticky-pin {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.moves-media-container {
+  position: relative;
+  width: 90vw;
+  max-width: 1200px;
+  height: 70vh;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+}
+
+.moves-frame-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(115%) brightness(90%);
+  transition: filter 0.3s ease;
+}
+
+.moves-caption-overlay {
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
+  right: 3rem;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.moves-kinetic-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 400;
+  color: var(--off-white);
+  max-width: 600px;
+  line-height: 1.15;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+}
+
+.moves-scrub-indicator {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mood-accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(224, 36, 125, 0.3);
+  border-radius: 20px;
+  background: rgba(6, 5, 8, 0.8);
+}
+
+/* ==========================================
+   SECTION 4 — FABRIC & CRAFT
+   ========================================== */
+.craft-section {
+  padding: 8rem var(--container-padding);
+  background: var(--bg-surface);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.craft-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.craft-title {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  color: var(--off-white);
+  margin-bottom: 2rem;
+}
+
+.craft-specs-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.craft-spec-item {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.spec-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.spec-val {
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: var(--cream);
+  font-weight: 600;
+}
+
+/* ==========================================
+   SECTION 5 — STYLE IT YOUR WAY (Mini Lookbook Carousel)
+   ========================================== */
+.style-it-section {
+  padding: 8rem var(--container-padding);
+  background: var(--bg-color);
+}
+
+.style-track-wrapper {
+  overflow-x: auto;
+  padding-bottom: 2rem;
+}
+
+.style-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+}
+
+.style-card {
+  flex: 0 0 320px;
+  height: 460px;
+  background: var(--bg-surface);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.style-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--mood-accent);
+}
+
+.style-card-img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+}
+
+.style-card-content {
+  padding: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+/* ==========================================
+   STICKY ADD TO CART BAR
+   ========================================== */
+.sticky-atc-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: rgba(6, 5, 8, 0.95);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 var(--container-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 150;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sticky-atc-bar.visible {
+  transform: translateY(0);
+}
+
+.sticky-product-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sticky-thumb {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.sticky-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--off-white);
+}
+
+.sticky-price {
+  font-size: 0.9rem;
+  color: var(--cream);
+  font-weight: 700;
+}
+
+.sticky-atc-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.sticky-btn-atc {
+  padding: 0.75rem 2rem;
+  background: var(--off-white);
+  color: #060508;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.sticky-btn-atc:hover {
+  background: var(--mood-accent);
+  color: #fff;
+}
+
+/* Responsive Rules */
+@media (max-width: 960px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .hero-media-col {
+    height: 70vh;
+  }
+
+  .hero-info-col {
+    padding: 3rem 1.5rem;
+  }
+
+  .editorial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .editorial-item-1,
+  .editorial-item-2 {
+    grid-column: span 1;
+    height: 420px;
+    margin-top: 0;
+  }
+
+  .craft-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pdp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pdp-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.pdp-header-actions a {
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.pdp-header-actions a:hover {
+  color: var(--off-white);
+}
+
+.pdp-header-actions .header-cart {
+  color: var(--off-white);
+}
+
+.cart-count-badge {
+  color: var(--mood-accent);
+}

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIGA — Wear Your Mood | Living Mood Engine</title>
+  <meta name="description" content="DIGA is a digital fashion house treating clothing as emotional language. Explore fashion tuned in real time by your mood.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/nav-mobile.css">
+</head>
+<body>
+
+  <!-- Atmospheric Dynamic Mood Overlay -->
+  <div id="mood-atmosphere"></div>
+
+  <!-- Site Header Navigation -->
+  <header class="site-header">
+    <a href="index.html" class="brand-mini">
+      <span class="brand-dot"></span>
+      DIGA
+    </a>
+
+    <nav class="nav-container">
+      <!-- PAGES Group -->
+      <div class="nav-group">
+        <span class="nav-group-label">PAGES</span>
+        <ul class="nav-group-links">
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="lookbook.html">Lookbook</a></li>
+          <li><a href="mood-finder.html">Mood Finder</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+
+      <!-- Divider -->
+      <span class="nav-divider">│</span>
+
+      <!-- HOME Group -->
+      <div class="nav-group">
+        <span class="nav-group-label">HOME</span>
+        <ul class="nav-group-links">
+          <li><a href="#read-the-room">Read The Room</a></li>
+          <li><a href="#spectrum">Spectrum</a></li>
+          <li><a href="#manifesto">Manifesto</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="nav-right-utility">
+      <div class="nav-active-mood">
+        <span class="pulse"></span>
+        <span>MOOD: <strong id="active-mood-name">FLUID</strong></span>
+      </div>
+      <a href="cart.html" class="nav-cart-link">CART (<span class="cart-count-badge">0</span>)</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- SECTION 1: HERO & MOOD SELECTOR -->
+    <section class="hero-section" id="hero">
+      <div class="hero-bg-wrapper">
+        <img src="assets/images/hero_bg.jpg" alt="DIGA Fashion Editorial" class="hero-bg-img">
+        <div class="hero-overlay"></div>
+      </div>
+
+      <div class="hero-content">
+        <!-- Fabric Layered Logo -->
+        <div class="logo-container" id="fabric-logo">
+          <div class="wordmark-fabric-wrapper">
+            <span class="wordmark-layer wordmark-layer-base">DIGA</span>
+            <span class="wordmark-layer wordmark-layer-1">DIGA</span>
+            <span class="wordmark-layer wordmark-layer-2">DIGA</span>
+            <span class="wordmark-layer wordmark-layer-3">DIGA</span>
+          </div>
+        </div>
+
+        <p class="tagline">Wear Your Mood</p>
+
+        <!-- Mood Dial Radial Container -->
+        <div class="mood-dial-container">
+          <span class="mood-dial-label">Tune Site Atmosphere</span>
+          <div class="mood-dial-radial">
+            <button class="mood-node" data-mood="fierce">Fierce</button>
+            <button class="mood-node active" data-mood="fluid">Fluid</button>
+            <button class="mood-node" data-mood="quiet">Quiet</button>
+            <button class="mood-node" data-mood="electric">Electric</button>
+            <button class="mood-node" data-mood="tender">Tender</button>
+            <button class="mood-node" data-mood="rebel">Rebel</button>
+          </div>
+        </div>
+      </div>
+
+      <a href="#read-the-room" class="hero-scroll-indicator" aria-label="Scroll Down">
+        <span>Scroll to Explore</span>
+        <span class="scroll-line"></span>
+      </a>
+    </section>
+
+    <!-- SECTION 2: READ THE ROOM (Horizontal Magazine Gallery) -->
+    <div class="gallery-section-wrapper" id="read-the-room">
+      <div class="gallery-sticky-pin">
+        <div class="section-header">
+          <div>
+            <span class="section-subtitle">Editorial Atmosphere</span>
+            <h2 class="section-title">Read The Room</h2>
+          </div>
+          <div class="gallery-drag-hint">
+            <span>Scroll / Drag horizontally</span>
+            <span>&rarr;</span>
+          </div>
+        </div>
+
+        <div class="gallery-track" id="gallery-track">
+          <!-- Card 1 -->
+          <article class="gallery-card" data-card-mood="RESTLESS">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/images/gallery_restless.jpg" alt="Restless Mood Fashion" class="gallery-card-img" loading="lazy">
+              <div class="gallery-card-overlay"></div>
+            </div>
+            <div class="gallery-card-content">
+              <span class="gallery-card-mood-tag">Mood 01 &mdash; Fierce</span>
+              <h3 class="gallery-card-word">RESTLESS</h3>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="gallery-card" data-card-mood="UNBOTHERED">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/images/gallery_unbothered.jpg" alt="Unbothered Mood Fashion" class="gallery-card-img" loading="lazy">
+              <div class="gallery-card-overlay"></div>
+            </div>
+            <div class="gallery-card-content">
+              <span class="gallery-card-mood-tag">Mood 02 &mdash; Quiet</span>
+              <h3 class="gallery-card-word">UNBOTHERED</h3>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="gallery-card" data-card-mood="ABLAZE">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/images/gallery_ablaze.jpg" alt="Ablaze Mood Fashion" class="gallery-card-img" loading="lazy">
+              <div class="gallery-card-overlay"></div>
+            </div>
+            <div class="gallery-card-content">
+              <span class="gallery-card-mood-tag">Mood 03 &mdash; Rebel</span>
+              <h3 class="gallery-card-word">ABLAZE</h3>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="gallery-card" data-card-mood="FLUID">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/images/collection_lifestyle_1.jpg" alt="Fluid Mood Fashion" class="gallery-card-img" loading="lazy">
+              <div class="gallery-card-overlay"></div>
+            </div>
+            <div class="gallery-card-content">
+              <span class="gallery-card-mood-tag">Mood 04 &mdash; Fluid</span>
+              <h3 class="gallery-card-word">TRANSCEND</h3>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="gallery-card" data-card-mood="ELECTRIC">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/images/collection_lifestyle_2.jpg" alt="Electric Mood Fashion" class="gallery-card-img" loading="lazy">
+              <div class="gallery-card-overlay"></div>
+            </div>
+            <div class="gallery-card-content">
+              <span class="gallery-card-mood-tag">Mood 05 &mdash; Electric</span>
+              <h3 class="gallery-card-word">VOLTAIC</h3>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="gallery-card" data-card-mood="QUIET">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/images/hero_bg.jpg" alt="Quiet Mood Fashion" class="gallery-card-img" loading="lazy">
+              <div class="gallery-card-overlay"></div>
+            </div>
+            <div class="gallery-card-content">
+              <span class="gallery-card-mood-tag">Mood 06 &mdash; Tender</span>
+              <h3 class="gallery-card-word">SOLITUDE</h3>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: FEATURED COLLECTION (Asymmetric Grid & Veil Reveals) -->
+    <section class="collection-section" id="collection">
+      <div class="section-header">
+        <div>
+          <span class="section-subtitle">Curated Silhouettes</span>
+          <h2 class="section-title">The Atmosphere Collection</h2>
+        </div>
+      </div>
+
+      <div class="collection-grid">
+        <!-- Item 1 (Large Lifestyle) -->
+        <a href="product-detail.html?id=asymmetric-gown" class="collection-item collection-item-1" style="text-decoration: none; color: inherit; display: block;">
+          <div class="veil-wrapper">
+            <div class="veil-scrim"></div>
+            <img src="assets/images/collection_lifestyle_1.jpg" alt="Asymmetric Draped Dress" class="veil-img" loading="lazy">
+          </div>
+          <div class="collection-info">
+            <div>
+              <h3 class="collection-title">Asymmetric Stage Gown</h3>
+              <p class="collection-meta">Deep Violet / Sheer Layering</p>
+            </div>
+            <span class="collection-price">&dollar;480</span>
+          </div>
+        </a>
+
+        <!-- Item 2 (Medium Cutout) -->
+        <a href="product-detail.html?id=voltaic-blazer" class="collection-item collection-item-2" style="text-decoration: none; color: inherit; display: block;">
+          <div class="veil-wrapper">
+            <div class="veil-scrim"></div>
+            <img src="assets/images/collection_lifestyle_2.jpg" alt="Oversized Tailored Blazer" class="veil-img" loading="lazy">
+          </div>
+          <div class="collection-info">
+            <div>
+              <h3 class="collection-title">Voltaic Sculpted Blazer</h3>
+              <p class="collection-meta">Structured Cream / Off-White</p>
+            </div>
+            <span class="collection-price">&dollar;540</span>
+          </div>
+        </a>
+
+        <!-- Item 3 (Product Detail) -->
+        <a href="product-detail.html?id=restless-coat" class="collection-item collection-item-3" style="text-decoration: none; color: inherit; display: block;">
+          <div class="veil-wrapper">
+            <div class="veil-scrim"></div>
+            <img src="assets/images/gallery_restless.jpg" alt="Fierce Cutout Coat" class="veil-img" loading="lazy">
+          </div>
+          <div class="collection-info">
+            <div>
+              <h3 class="collection-title">Restless Cutout Overcoat</h3>
+              <p class="collection-meta">Heavy Wool / Avant-Garde</p>
+            </div>
+            <span class="collection-price">&dollar;690</span>
+          </div>
+        </a>
+
+        <!-- Item 4 (Wide Lifestyle) -->
+        <a href="product-detail.html?id=ablaze-kinetic-silk-dress" class="collection-item collection-item-4" style="text-decoration: none; color: inherit; display: block;">
+          <div class="veil-wrapper">
+            <div class="veil-scrim"></div>
+            <img src="assets/images/gallery_ablaze.jpg" alt="Ablaze Motion Silk Gown" class="veil-img" loading="lazy">
+          </div>
+          <div class="collection-info">
+            <div>
+              <h3 class="collection-title">Ablaze Motion Silk Dress</h3>
+              <p class="collection-meta">Crimson Silk / Kinetic Draping</p>
+            </div>
+            <span class="collection-price">&dollar;620</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Subtle Editorial Link Underneath Collection -->
+      <div class="collection-footer-cta">
+        <a href="shop.html" class="editorial-collection-link">
+          <span>EXPLORE THE FULL COLLECTION</span>
+          <span class="cta-arrow">&rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 4: THE SPECTRUM (Interactive Visual Color-Emotion Drag Bar) -->
+    <section class="spectrum-section" id="spectrum">
+      <div class="spectrum-header">
+        <span class="section-subtitle">Visual Tuning Metaphor</span>
+        <h2 class="section-title">The Spectrum</h2>
+        <p class="spectrum-desc">Drag the handle across the chromatic frequency to feel how clothing shifts emotional temperature in real time.</p>
+      </div>
+
+      <div class="spectrum-bar-wrapper">
+        <div class="spectrum-bar" id="spectrum-bar">
+          <div class="spectrum-handle" id="spectrum-handle"></div>
+        </div>
+        <div class="spectrum-labels">
+          <span>Deep Purple &bull; Quiet</span>
+          <span>Electric Violet &bull; Fluid</span>
+          <span>Magenta &bull; Fierce</span>
+        </div>
+      </div>
+
+      <div class="spectrum-previews">
+        <div class="spectrum-card">
+          <img src="assets/images/gallery_restless.jpg" alt="Spectrum Preview 1" class="spectrum-card-img">
+          <span class="spectrum-card-tag">Frequency 01</span>
+          <h4 class="spectrum-card-title">Resonance Coat</h4>
+        </div>
+
+        <div class="spectrum-card">
+          <img src="assets/images/collection_lifestyle_2.jpg" alt="Spectrum Preview 2" class="spectrum-card-img">
+          <span class="spectrum-card-tag">Frequency 02</span>
+          <h4 class="spectrum-card-title">Chromatic Trousers</h4>
+        </div>
+
+        <div class="spectrum-card">
+          <img src="assets/images/gallery_ablaze.jpg" alt="Spectrum Preview 3" class="spectrum-card-img">
+          <span class="spectrum-card-tag">Frequency 03</span>
+          <h4 class="spectrum-card-title">Aura Silk Wrap</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: BRAND MANIFESTO (Kinetic Scroll Typography) -->
+    <section class="manifesto-section" id="manifesto">
+      <div class="manifesto-container">
+        <span class="manifesto-label">Our Manifesto</span>
+        <blockquote class="manifesto-text">
+          <span class="kinetic-word">Clothing</span> 
+          <span class="kinetic-word">is</span> 
+          <span class="kinetic-word">not</span> 
+          <span class="kinetic-word highlight">armor.</span> 
+          <span class="kinetic-word">It</span> 
+          <span class="kinetic-word">is</span> 
+          <span class="kinetic-word">an</span> 
+          <span class="kinetic-word">emotional</span> 
+          <span class="kinetic-word highlight">language</span> 
+          <span class="kinetic-word">spoken</span> 
+          <span class="kinetic-word">in</span> 
+          <span class="kinetic-word">sheer</span> 
+          <span class="kinetic-word">fabric,</span> 
+          <span class="kinetic-word">fluid</span> 
+          <span class="kinetic-word">motion,</span> 
+          <span class="kinetic-word">and</span> 
+          <span class="kinetic-word highlight">silence.</span>
+        </blockquote>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER: MOOD SUBSCRIPTION -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div>
+        <h2 class="footer-brand">DIGA</h2>
+        <p class="footer-subheading">Get your next mood delivered straight to your emotional inbox.</p>
+        
+        <form class="mood-sub-form" id="mood-sub-form">
+          <input type="email" class="mood-sub-input" id="mood-sub-email" placeholder="Enter your email address..." required>
+          <button type="submit" class="mood-sub-btn" id="mood-sub-btn">SUBSCRIBE</button>
+        </form>
+      </div>
+
+      <div class="footer-nav-grid">
+        <div>
+          <h4 class="footer-col-title">NAVIGATION</h4>
+          <ul class="footer-col-links">
+            <li><a href="#hero">Mood Dial</a></li>
+            <li><a href="#read-the-room">Read The Room</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#spectrum">Spectrum Bar</a></li>
+            <li><a href="#manifesto">Manifesto</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">SOCIAL</h4>
+          <ul class="footer-col-links">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="#">Pinterest</a></li>
+            <li><a href="#">Vimeo</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 DIGA Fashion Group. All rights reserved.</span>
+      <span>Wear Your Mood &trade;</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/nav-mobile.js"></script>
+</body>
+</html>

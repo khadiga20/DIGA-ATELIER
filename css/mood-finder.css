@@ -1,0 +1,609 @@
+/* ==========================================
+   DIGA — Interactive Mood Finder & Style Quiz
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&display=swap');
+
+:root {
+  --bg-color: #050407;
+  --bg-gradient: radial-gradient(circle at 50% 50%, #150921 0%, #050407 80%);
+  --text-main: #f5f2eb;
+  --text-muted: #8e8a94;
+  --cream: #f4efe6;
+  --off-white: #faf7f2;
+  
+  --quiz-accent-1: #7A22C4;
+  --quiz-accent-2: #E0247D;
+  --quiz-glow: rgba(122, 34, 196, 0.5);
+  
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Barlow Condensed', -apple-system, sans-serif;
+  --container-padding: clamp(1.5rem, 5vw, 5rem);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  position: relative;
+  background: var(--bg-gradient);
+  transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Background Animated Fabric Mesh Shader simulation */
+.fabric-bg-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: 
+    radial-gradient(ellipse at 20% 30%, rgba(122, 34, 196, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(224, 36, 125, 0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 50%, rgba(100, 30, 255, 0.2) 0%, transparent 70%);
+  filter: blur(60px);
+  animation: mesh-pulse 12s infinite alternate ease-in-out;
+  transition: opacity 1.5s ease;
+}
+
+@keyframes mesh-pulse {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.15) rotate(3deg); }
+  100% { transform: scale(1.05) rotate(-2deg); }
+}
+
+/* ==========================================
+   QUIET HEADER & PROGRESS BAR
+   ========================================== */
+.quiz-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  padding: 0 var(--container-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: linear-gradient(180deg, rgba(5,4,7,0.9) 0%, rgba(5,4,7,0) 100%);
+}
+
+.brand-logo {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.25em;
+  color: var(--text-main);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--quiz-accent-2);
+  box-shadow: 0 0 10px var(--quiz-accent-2);
+}
+
+.quiz-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.progress-bar-track {
+  width: 120px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--quiz-accent-1), var(--quiz-accent-2));
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 8px var(--quiz-accent-2);
+}
+
+.exit-btn {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+.exit-btn:hover { color: var(--text-main); }
+
+/* ==========================================
+   MAIN QUIET VIEW CONTAINER
+   ========================================== */
+.quiz-viewport {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.quiz-step {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem var(--container-padding) 2rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s ease;
+  transform: translateY(20px) scale(0.98);
+}
+
+.quiz-step.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* Fabric Curtain Wipe Overlay Transition */
+.fabric-wipe-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: linear-gradient(135deg, #11071c 0%, #050407 50%, #1e0926 100%);
+  pointer-events: none;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.fabric-wipe-curtain.wipe-down {
+  clip-path: inset(0 0 0 0);
+}
+
+.fabric-wipe-curtain.wipe-off {
+  clip-path: inset(0 0 100% 0);
+}
+
+/* ==========================================
+   STEP 0 — INTRO SCREEN
+   ========================================== */
+.intro-content {
+  text-align: center;
+  max-width: 900px;
+}
+
+.intro-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--quiz-accent-2);
+  margin-bottom: 1.5rem;
+  padding: 0.3rem 1rem;
+  border: 1px solid rgba(224, 36, 125, 0.3);
+  border-radius: 20px;
+  background: rgba(224, 36, 125, 0.05);
+}
+
+.intro-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 6.5vw, 6rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--off-white);
+  margin-bottom: 2rem;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.intro-subtext {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  max-width: 550px;
+  margin: 0 auto 3.5rem;
+}
+
+.btn-begin-quiz {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.2rem 3rem;
+  background: var(--off-white);
+  color: #050407;
+  border: none;
+  border-radius: 40px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15), 0 0 25px var(--quiz-glow);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.btn-begin-quiz:hover {
+  background: var(--quiz-accent-2);
+  color: #fff;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 15px 40px rgba(224, 36, 125, 0.5);
+}
+
+/* ==========================================
+   QUESTION STEPS (FULL SCREEN CARDS)
+   ========================================== */
+.question-prompt-wrap {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.question-num {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--quiz-accent-2);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.question-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  color: var(--off-white);
+}
+
+/* Options Grid — Binary (2 options) & Multi (3-4 options) */
+.options-container {
+  display: flex;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1100px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.options-container.multi-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.option-card {
+  position: relative;
+  flex: 1;
+  min-height: 380px;
+  max-height: 520px;
+  background: rgba(14, 12, 18, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.option-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--quiz-accent-2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px var(--quiz-glow);
+}
+
+/* Implosion / Absorb Feedback Effect on Click */
+.option-card.imploding {
+  animation: implode-absorb 0.6s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
+  z-index: 100;
+}
+
+@keyframes implode-absorb {
+  0% { transform: scale(1.05); filter: brightness(1.5); }
+  50% { transform: scale(1.15) rotate(2deg); opacity: 0.9; }
+  100% { transform: scale(0.2) rotate(-10deg); opacity: 0; filter: blur(10px); }
+}
+
+.option-img-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.option-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%) contrast(110%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+}
+
+.option-card:hover .option-img {
+  transform: scale(1.08);
+  filter: grayscale(0%) contrast(120%);
+}
+
+.option-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5,4,7,0.1) 0%, rgba(5,4,7,0.85) 100%);
+}
+
+.option-content {
+  position: absolute;
+  inset: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  z-index: 5;
+}
+
+.option-label {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--off-white);
+  margin-bottom: 0.3rem;
+}
+
+.option-subtext {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Color Swatch Option Specific */
+.swatch-card {
+  height: 220px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ==========================================
+   RESULT SCREEN — PERSONALIZED MOOD REVEAL
+   ========================================== */
+.quiz-step.result-step {
+  position: relative;
+  min-height: 100vh;
+  height: auto;
+  overflow-y: auto;
+  padding-bottom: 6rem;
+  display: block;
+}
+
+.result-hero {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem var(--container-padding);
+}
+
+.result-badge {
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--quiz-accent-2);
+  margin-bottom: 1.5rem;
+}
+
+/* Letter-by-letter illuminated glow reveal */
+.result-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--off-white);
+  margin-bottom: 2rem;
+}
+
+.letter-glow {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+  filter: blur(8px);
+  animation: illuminate-letter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes illuminate-letter {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    text-shadow: 0 0 30px var(--quiz-accent-2), 0 0 60px var(--quiz-accent-1);
+  }
+}
+
+.result-description {
+  font-size: 1.2rem;
+  color: var(--cream);
+  max-width: 650px;
+  line-height: 1.6;
+  margin-bottom: 3.5rem;
+}
+
+.result-actions {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.btn-shop-mood {
+  padding: 1.1rem 2.8rem;
+  background: var(--off-white);
+  color: #050407;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.btn-shop-mood:hover {
+  background: var(--quiz-accent-2);
+  color: #fff;
+  box-shadow: 0 10px 35px var(--quiz-glow);
+}
+
+.btn-share-mood {
+  padding: 1.1rem 2rem;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-share-mood:hover {
+  color: var(--off-white);
+  border-color: var(--off-white);
+}
+
+/* Curated Product Capsule Lookbook */
+.capsule-section {
+  padding: 4rem var(--container-padding);
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.capsule-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  margin-bottom: 2.5rem;
+  color: var(--off-white);
+  text-align: center;
+}
+
+.capsule-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.capsule-card {
+  background: rgba(14, 12, 18, 0.8);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+.capsule-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.capsule-card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+}
+
+.capsule-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(105%);
+  transition: transform 0.6s ease;
+}
+
+.capsule-card:hover .capsule-card-img {
+  transform: scale(1.06);
+}
+
+.capsule-card-info {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.capsule-item-name {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--off-white);
+}
+
+.capsule-item-price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cream);
+}
+
+/* Responsive Rules */
+@media (max-width: 900px) {
+  .options-container {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .options-container.multi-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .option-card {
+    min-height: 220px;
+    max-height: 260px;
+  }
+  .capsule-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .options-container.multi-4 {
+    grid-template-columns: 1fr;
+  }
+  .capsule-grid {
+    grid-template-columns: 1fr;
+  }
+  .result-headline {
+    font-size: 3rem;
+  }
+}

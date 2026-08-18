@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Atmosphere Collection &mdash; DIGA Shop</title>
+  <meta name="description"
+    content="Explore DIGA's atmosphere collection — garments tuned by emotion and mood signatures.">
+  <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="css/nav-mobile.css">
+</head>
+
+<body>
+
+  <!-- Ambient Light Bleed Overlay -->
+  <div class="shop-ambient-light"></div>
+
+  <!-- Header Nav -->
+  <header class="shop-header">
+    <a href="index.html" class="brand-mini">
+      <span class="brand-dot"></span>
+      DIGA
+    </a>
+
+    <ul class="shop-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="mood-finder.html">Mood Finder</a></li>
+      <li><a href="shop.html" class="active">Collection</a></li>
+      <li><a href="lookbook.html">Lookbook</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="cart.html">Capsule (<span class="cart-count-badge">0</span>)</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <!-- Catalog Hero Header -->
+    <section class="catalog-hero">
+      <span class="catalog-subtitle">Curated Emotional Silhouettes</span>
+      <h1 class="catalog-title">The Atmosphere Catalog</h1>
+      <p class="catalog-desc">Every piece is woven with a distinct mood signature. Select an emotional frequency to
+        filter the collection.</p>
+    </section>
+
+    <!-- Filter Controls -->
+    <section class="shop-controls" id="catalog">
+      <div class="mood-tabs">
+        <button class="mood-tab-btn active" data-category="all">All Silhouettes</button>
+        <button class="mood-tab-btn" data-category="magenta">Restless Magenta</button>
+        <button class="mood-tab-btn" data-category="violet">Electric Violet</button>
+        <button class="mood-tab-btn" data-category="obsidian">Quiet Obsidian</button>
+      </div>
+
+      <div class="catalog-meta-bar">
+        <span>ATMOSPHERE SELECTION</span>
+        <span id="product-count">6 SILHOUETTES</span>
+      </div>
+    </section>
+
+    <!-- Product Grid Container -->
+    <section class="shop-grid-container">
+      <div class="shop-grid" id="shop-grid">
+        <!-- Rendered dynamically by js/shop.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Minimal Dark Footer -->
+  <footer
+    style="background: #030304; padding: 4rem var(--container-padding) 2rem; border-top: 1px solid rgba(255,255,255,0.05); font-family: var(--font-sans);">
+    <div
+      style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; letter-spacing: 0.15em; color: var(--text-dim);">
+      <span>&copy; 2026 DIGA Fashion Group. All rights reserved.</span>
+      <a href="mood-finder.html" style="color: var(--accent-secondary); text-decoration: none;">Take the Mood Finder
+        &rarr;</a>
+    </div>
+  </footer>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/nav-mobile.js"></script>
+</body>
+
+</html>

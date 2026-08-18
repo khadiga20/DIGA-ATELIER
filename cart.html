@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Mood Capsule — DIGA</title>
+  <meta name="description" content="Review your selected emotional silhouettes in your DIGA Mood Capsule.">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/nav-mobile.css">
+</head>
+
+<body>
+
+  <!-- Header Nav -->
+  <header class="cart-header">
+    <a href="index.html" class="brand-mini">
+      <span class="brand-dot"></span>
+      DIGA
+    </a>
+
+    <ul class="cart-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Collection</a></li>
+      <li><a href="lookbook.html">Lookbook</a></li>
+      <li><a href="mood-finder.html">Mood Finder</a></li>
+      <li><a href="cart.html" class="active">Capsule (<span class="cart-count-badge">0</span>)</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="cart-hero-section">
+      <span class="cart-subtitle">Atmosphere Selection</span>
+      <h1 class="cart-title">Your Mood Capsule</h1>
+      <p class="cart-desc">Review your curated emotional silhouettes before proceeding to your final fitting.</p>
+    </section>
+
+    <!-- Main Cart Content -->
+    <section class="cart-content-container">
+
+      <!-- Empty State -->
+      <div class="cart-empty-state" id="cart-empty-state" style="display: none;">
+        <span class="empty-icon">&bull; &bull; &bull;</span>
+        <h2 class="empty-title">Your Mood Capsule is Empty</h2>
+        <p class="empty-subtext">You have not selected any emotional silhouettes yet. Explore the collection to find
+          garments tuned to your current mood state.</p>
+        <a href="shop.html" class="btn-checkout" style="display: inline-flex; width: auto; padding: 1rem 2.5rem;">
+          <span>EXPLORE THE COLLECTION</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Active Cart Grid -->
+      <div class="cart-grid" id="cart-grid-wrapper">
+        <!-- Left Column: Item List -->
+        <div class="cart-items-list" id="cart-items-container">
+          <!-- Rendered dynamically by js/cart.js -->
+        </div>
+
+        <!-- Right Column: Summary Card -->
+        <aside class="cart-summary-card">
+          <h3 class="summary-title">Capsule Summary</h3>
+
+          <div class="summary-row">
+            <span>SUBTOTAL</span>
+            <span id="cart-subtotal">&dollar;0</span>
+          </div>
+
+          <div class="summary-row">
+            <span>ATELIER SHIPPING</span>
+            <span style="color: var(--accent-secondary);">COMPLIMENTARY</span>
+          </div>
+
+          <div class="summary-row">
+            <span>TAX & DUTIES</span>
+            <span>INCLUDED</span>
+          </div>
+
+          <div class="summary-row total-row">
+            <span>ESTIMATED TOTAL</span>
+            <span id="cart-grand-total">&dollar;0</span>
+          </div>
+
+          <a href="checkout.html" class="btn-checkout" id="btn-continue-checkout">
+            <span>CONTINUE TO CHECKOUT</span>
+            <span>&rarr;</span>
+          </a>
+
+          <a href="shop.html#catalog" class="continue-shopping-link">&larr; Return to Atmosphere Catalog</a>
+        </aside>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/nav-mobile.js"></script>
+</body>
+
+</html>

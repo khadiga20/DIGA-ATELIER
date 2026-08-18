@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Fitting & Checkout — DIGA</title>
+  <meta name="description" content="Complete your DIGA atmosphere order reservation.">
+  <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="css/nav-mobile.css">
+</head>
+<body>
+
+  <!-- Header Nav -->
+  <header class="checkout-header">
+    <a href="index.html" class="brand-mini">
+      <span class="brand-dot"></span>
+      DIGA
+    </a>
+
+    <div class="secure-badge">
+      SECURE ATELIER CHECKOUT
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Title -->
+    <section class="checkout-hero">
+      <span class="checkout-subtitle">Atmosphere Order Reservation</span>
+      <h1 class="checkout-title">Final Fitting & Checkout</h1>
+
+      <!-- Multi-step Progress Bar -->
+      <div class="checkout-steps-bar" id="checkout-steps-bar">
+        <div class="step-indicator active" data-step="1">
+          <span class="step-num">1</span>
+          <span>Information</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-indicator" data-step="2">
+          <span class="step-num">2</span>
+          <span>Shipping</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-indicator" data-step="3">
+          <span class="step-num">3</span>
+          <span>Payment</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Container -->
+    <section class="checkout-container">
+
+      <!-- Empty Cart State -->
+      <div class="checkout-empty-state" id="checkout-empty-state" style="display: none;">
+        <span style="font-size: 3rem; color: var(--text-dim); display: block; margin-bottom: 1rem;">&bull; &bull; &bull;</span>
+        <h2 style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--off-white); margin-bottom: 1rem;">Your Mood Capsule is Empty</h2>
+        <p style="color: var(--text-muted); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.6;">
+          There are no pieces waiting for checkout in your Mood Capsule. Explore our atmosphere catalog to select garments tuned to your emotional frequency.
+        </p>
+        <a href="shop.html#catalog" class="btn-next-step" style="display: inline-flex; width: auto; text-decoration: none;">
+          <span>EXPLORE THE COLLECTION</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Main Checkout Grid -->
+      <div class="checkout-grid" id="checkout-grid-container">
+
+        <!-- Left Column: Multi-Step Forms -->
+        <div class="form-steps-container">
+
+          <!-- STEP 1: INFORMATION -->
+          <div class="form-step-panel active" id="step-panel-1">
+            <h3 class="step-header-title">01. Customer Information</h3>
+            <p class="step-header-desc">Enter your contact details for atelier order confirmation.</p>
+
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="cust-name" class="form-label">Full Customer Name *</label>
+                <input type="text" id="cust-name" class="form-input" placeholder="e.g. Eleanor Vance" required>
+              </div>
+
+              <div class="form-group">
+                <label for="cust-email" class="form-label">Email Address *</label>
+                <input type="email" id="cust-email" class="form-input" placeholder="eleanor@atelier.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="cust-phone" class="form-label">Phone Number *</label>
+                <input type="tel" id="cust-phone" class="form-input" placeholder="+1 (555) 019-2834" required>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <a href="cart.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;">&larr; Return to Capsule</a>
+              <button type="button" class="btn-next-step" id="btn-step1-next">
+                <span>Continue to Shipping</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2: SHIPPING ADDRESS -->
+          <div class="form-step-panel" id="step-panel-2">
+            <h3 class="step-header-title">02. Shipping Address</h3>
+            <p class="step-header-desc">Where should your curated mood capsule be delivered?</p>
+
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="ship-address" class="form-label">Street Address *</label>
+                <input type="text" id="ship-address" class="form-input" placeholder="742 Evergreen Terrace, Suite 4" required>
+              </div>
+
+              <div class="form-group">
+                <label for="ship-city" class="form-label">City *</label>
+                <input type="text" id="ship-city" class="form-input" placeholder="Milan" required>
+              </div>
+
+              <div class="form-group">
+                <label for="ship-country" class="form-label">Country *</label>
+                <input type="text" id="ship-country" class="form-input" placeholder="Italy / International" required>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="ship-postal" class="form-label">Postal / Zip Code *</label>
+                <input type="text" id="ship-postal" class="form-input" placeholder="20121" required>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-back-step" id="btn-step2-back">&larr; Back to Info</button>
+              <button type="button" class="btn-next-step" id="btn-step2-next">
+                <span>Continue to Payment</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 3: PAYMENT METHOD -->
+          <div class="form-step-panel" id="step-panel-3">
+            <h3 class="step-header-title">03. Atelier Payment</h3>
+            <p class="step-header-desc">Enter card details to finalize your mood reservation.</p>
+
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="pay-name" class="form-label">Cardholder Name *</label>
+                <input type="text" id="pay-name" class="form-input" placeholder="Eleanor Vance" required>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="pay-number" class="form-label">Card Number *</label>
+                <input type="text" id="pay-number" class="form-input" placeholder="4532 &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 8910" required>
+              </div>
+
+              <div class="form-group">
+                <label for="pay-expiry" class="form-label">Expiration Date *</label>
+                <input type="text" id="pay-expiry" class="form-input" placeholder="MM / YY" required>
+              </div>
+
+              <div class="form-group">
+                <label for="pay-cvv" class="form-label">CVV Code *</label>
+                <input type="password" id="pay-cvv" class="form-input" placeholder="&bull;&bull;&bull;" maxlength="4" required>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-back-step" id="btn-step3-back">&larr; Back to Shipping</button>
+              <button type="button" class="btn-next-step" id="btn-submit-payment" style="background: var(--accent-secondary); color: #fff;">
+                <span>CONFIRM & PLACE RESERVATION</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Order Summary ("Your Capsule") -->
+        <aside class="order-summary-panel">
+          <h3 class="summary-title">
+            <span>Your Capsule</span>
+            <span style="font-size: 0.8rem; font-family: var(--font-sans); color: var(--text-muted);">RESERVATION SUMMARY</span>
+          </h3>
+
+          <div class="summary-items-scroll" id="summary-items-scroll">
+            <!-- Dynamically rendered by js/checkout.js -->
+          </div>
+
+          <div class="summary-calc-list">
+            <div class="calc-row">
+              <span>SUBTOTAL</span>
+              <span id="summary-subtotal">&dollar;0</span>
+            </div>
+            <div class="calc-row">
+              <span>ATELIER SHIPPING</span>
+              <span style="color: var(--accent-secondary);">COMPLIMENTARY</span>
+            </div>
+            <div class="calc-row">
+              <span>TAX & DUTIES</span>
+              <span>INCLUDED</span>
+            </div>
+            <div class="calc-row total-row">
+              <span>ESTIMATED TOTAL</span>
+              <span id="summary-total">&dollar;0</span>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- CONFIRMATION SCREEN (Hidden by default until payment simulation succeeds) -->
+      <div class="confirmation-panel" id="confirmation-screen" style="display: none;">
+        <span class="confirmation-badge">&bull; Atelier Order Confirmed &bull;</span>
+        <h1 class="confirmation-title">Your Mood Is Reserved</h1>
+        
+        <div class="order-num-tag">
+          ORDER NUMBER: <span id="conf-order-num">DIGA-2026-89412</span>
+        </div>
+
+        <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 580px; margin: 0 auto 2rem; line-height: 1.6;">
+          Thank you, <strong id="conf-cust-name" style="color: var(--off-white);">Valued Guest</strong>. A confirmation ritual has been dispatched to <strong id="conf-cust-email" style="color: var(--cream);">your email</strong>. Your tailored silhouettes are being prepared in our Milan Atelier.
+        </p>
+
+        <div style="margin-top: 3rem;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--off-white); margin-bottom: 1rem;">Acquired Silhouettes</h3>
+          <div class="acquired-items-grid" id="acquired-items-container">
+            <!-- Populated dynamically before cart is cleared -->
+          </div>
+        </div>
+
+        <div style="margin-top: 4rem;">
+          <a href="shop.html#catalog" class="btn-next-step" style="display: inline-flex; width: auto; text-decoration: none;">
+            <span>CONTINUE EXPLORING YOUR MOOD</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/checkout.js"></script>
+  <script src="js/nav-mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIGA — Mood Finder & Sensory Quiz</title>
+  <meta name="description" content="Discover your current emotional style profile through DIGA's sensory mood finder experiment.">
+  <link rel="stylesheet" href="css/mood-finder.css">
+  <link rel="stylesheet" href="css/nav-mobile.css">
+</head>
+<body>
+
+  <!-- Background Animated Fabric Mesh Overlay -->
+  <div class="fabric-bg-mesh"></div>
+
+  <!-- Fabric Curtain Wipe Overlay Transition -->
+  <div class="fabric-wipe-curtain" id="fabric-curtain"></div>
+
+  <!-- Quiet Header & Progress Track -->
+  <header class="quiz-header">
+    <a href="index.html" class="brand-logo">
+      <span class="brand-dot"></span>
+      DIGA
+    </a>
+
+    <div class="quiz-progress-wrap">
+      <span class="progress-text" id="progress-step-text">SENSORY RITUAL</span>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+      </div>
+    </div>
+
+    <a href="index.html" class="exit-btn">&times; Close</a>
+  </header>
+
+  <!-- Quiz Viewport Container -->
+  <div class="quiz-viewport">
+
+    <!-- STEP 0: INTRO SCREEN -->
+    <div class="quiz-step active" id="step-0">
+      <div class="intro-content">
+        <span class="intro-badge">Sensory Style Discovery</span>
+        <h1 class="intro-headline">What does your mood look like today?</h1>
+        <p class="intro-subtext">React intuitively to visual, texture, and light experiments to unlock your personal emotional style profile.</p>
+        <button class="btn-begin-quiz" id="btn-begin-quiz">
+          <span>Begin Ritual</span>
+          <span>&rarr;</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 1: PICK YOUR ENERGY -->
+    <div class="quiz-step" id="step-1">
+      <div class="question-prompt-wrap">
+        <span class="question-num">Step 01 / 05</span>
+        <h2 class="question-title">Pick your energy</h2>
+      </div>
+
+      <div class="options-container">
+        <!-- Option A: Solitude -->
+        <article class="option-card" data-points="QUIET_SOLITUDE">
+          <div class="option-img-wrap">
+            <img src="assets/images/gallery_unbothered.jpg" alt="Subdued Solitude" class="option-img">
+            <div class="option-overlay"></div>
+          </div>
+          <div class="option-content">
+            <h3 class="option-label">Subdued Solitude</h3>
+            <span class="option-subtext">Slow &bull; Ambient &bull; Introspective</span>
+          </div>
+        </article>
+
+        <!-- Option B: Voltage -->
+        <article class="option-card" data-points="ELECTRIC_REBEL">
+          <div class="option-img-wrap">
+            <img src="assets/images/gallery_restless.jpg" alt="Kinetic Voltage" class="option-img">
+            <div class="option-overlay"></div>
+          </div>
+          <div class="option-content">
+            <h3 class="option-label">Kinetic Voltage</h3>
+            <span class="option-subtext">Fast &bull; Electric &bull; High Contrast</span>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- STEP 2: PICK YOUR TEXTURE -->
+    <div class="quiz-step" id="step-2">
+      <div class="question-prompt-wrap">
+        <span class="question-num">Step 02 / 05</span>
+        <h2 class="question-title">Pick your texture</h2>
+      </div>
+
+      <div class="options-container">
+        <!-- Option A: Sheer Silk -->
+        <article class="option-card" data-points="FLUID_ETHEREAL">
+          <div class="option-img-wrap">
+            <img src="assets/images/hero_bg.jpg" alt="Sheer Translucent Silk" class="option-img">
+            <div class="option-overlay"></div>
+          </div>
+          <div class="option-content">
+            <h3 class="option-label">Sheer Translucent Silk</h3>
+            <span class="option-subtext">Weightless &bull; Flowing &bull; Ethereal</span>
+          </div>
+        </article>
+
+        <!-- Option B: Heavy Wool -->
+        <article class="option-card" data-points="FIERCE_LUMINARY">
+          <div class="option-img-wrap">
+            <img src="assets/images/collection_lifestyle_2.jpg" alt="Sculpted Heavy Wool" class="option-img">
+            <div class="option-overlay"></div>
+          </div>
+          <div class="option-content">
+            <h3 class="option-label">Sculpted Heavy Wool</h3>
+            <span class="option-subtext">Architectural &bull; Grounded &bull; Precise</span>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- STEP 3: PICK YOUR COLOR SPECTRUM -->
+    <div class="quiz-step" id="step-3">
+      <div class="question-prompt-wrap">
+        <span class="question-num">Step 03 / 05</span>
+        <h2 class="question-title">Pick your color frequency</h2>
+      </div>
+
+      <div class="options-container multi-4">
+        <!-- Swatch 1: Obsidian -->
+        <article class="option-card swatch-card" data-points="QUIET_SOLITUDE" style="background: linear-gradient(135deg, #111016, #050407);">
+          <div class="option-content" style="position: relative; padding: 1.2rem;">
+            <h3 class="option-label" style="font-size: 1.4rem;">Midnight Obsidian</h3>
+            <span class="option-subtext">Monochrome Calm</span>
+          </div>
+        </article>
+
+        <!-- Swatch 2: Electric Violet -->
+        <article class="option-card swatch-card" data-points="FLUID_ETHEREAL" style="background: linear-gradient(135deg, #7A22C4, #536DFE);">
+          <div class="option-content" style="position: relative; padding: 1.2rem;">
+            <h3 class="option-label" style="font-size: 1.4rem;">Electric Violet</h3>
+            <span class="option-subtext">Fluid Resonance</span>
+          </div>
+        </article>
+
+        <!-- Swatch 3: Magenta Glow -->
+        <article class="option-card swatch-card" data-points="ELECTRIC_REBEL" style="background: linear-gradient(135deg, #E0247D, #FF1744);">
+          <div class="option-content" style="position: relative; padding: 1.2rem;">
+            <h3 class="option-label" style="font-size: 1.4rem;">Neon Magenta</h3>
+            <span class="option-subtext">Rebel Pulse</span>
+          </div>
+        </article>
+
+        <!-- Swatch 4: Deep Purple Stage -->
+        <article class="option-card swatch-card" data-points="FIERCE_LUMINARY" style="background: linear-gradient(135deg, #4A148C, #C2185B);">
+          <div class="option-content" style="position: relative; padding: 1.2rem;">
+            <h3 class="option-label" style="font-size: 1.4rem;">Deep Purple</h3>
+            <span class="option-subtext">Fierce Stage Bleed</span>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- STEP 4: PICK YOUR SILHOUETTE -->
+    <div class="quiz-step" id="step-4">
+      <div class="question-prompt-wrap">
+        <span class="question-num">Step 04 / 05</span>
+        <h2 class="question-title">Pick your silhouette</h2>
+      </div>
+
+      <div class="options-container">
+        <!-- Option A: Asymmetric Draping -->
+        <article class="option-card" data-points="FLUID_ETHEREAL">
+          <div class="option-img-wrap">
+            <img src="assets/images/collection_lifestyle_1.jpg" alt="Asymmetric Draped Silhouette" class="option-img">
+            <div class="option-overlay"></div>
+          </div>
+          <div class="option-content">
+            <h3 class="option-label">Asymmetric Draped Flow</h3>
+            <span class="option-subtext">Unstructured &bull; Organic Movement</span>
+          </div>
+        </article>
+
+        <!-- Option B: Tailored Structure -->
+        <article class="option-card" data-points="ELECTRIC_REBEL">
+          <div class="option-img-wrap">
+            <img src="assets/images/gallery_restless.jpg" alt="Tailored Sculpted Structure" class="option-img">
+            <div class="option-overlay"></div>
+          </div>
+          <div class="option-content">
+            <h3 class="option-label">Tailored Sculpted Structure</h3>
+            <span class="option-subtext">Defined Shoulders &bull; Sharp Angles</span>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- STEP 5: PICK YOUR ATMOSPHERE -->
+    <div class="quiz-step" id="step-5">
+      <div class="question-prompt-wrap">
+        <span class="question-num">Step 05 / 05</span>
+        <h2 class="question-title">Pick your atmosphere</h2>
+      </div>
+
+      <div class="options-container">
+        <!-- Option A: Daylight Studio -->
+        <article class="option-card" data-points="QUIET_SOLITUDE">
+          <div class="option-img-wrap">
+            <img src="assets/images/gallery_unbothered.jpg" alt="Subdued Studio Lighting" class="option-img">
+            <div class="option-overlay"></div>
+          </div>
+          <div class="option-content">
+            <h3 class="option-label">Subdued Ambient Daylight</h3>
+            <span class="option-subtext">Soft Shadows &bull; Concrete &bull; Quiet</span>
+          </div>
+        </article>
+
+        <!-- Option B: Spotlight Bleed -->
+        <article class="option-card" data-points="FIERCE_LUMINARY">
+          <div class="option-img-wrap">
+            <img src="assets/images/gallery_ablaze.jpg" alt="Stage Spotlight Light Bleed" class="option-img">
+            <div class="option-overlay"></div>
+          </div>
+          <div class="option-content">
+            <h3 class="option-label">Stage Spotlight & Smoke</h3>
+            <span class="option-subtext">Deep Purple Light Bleed &bull; Dramatic</span>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- RESULT SCREEN: PERSONALIZED MOOD REVEAL -->
+    <div class="quiz-step result-step" id="step-result">
+      
+      <!-- Hero Reveal -->
+      <section class="result-hero">
+        <span class="result-badge">Your Style Atmosphere Is Revealed</span>
+        <h1 class="result-headline" id="result-headline">ELECTRIC REBEL</h1>
+        <p style="font-family: var(--font-sans); font-size: 1.1rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--quiz-accent-2); margin-bottom: 1rem;" id="result-tagline">
+          Unapologetic Voltage & Sharp Architecture
+        </p>
+        <p class="result-description" id="result-description">
+          Your mood is charged with kinetic energy and rebellious poise. You don't blend into space—you transform it. Your style demands high contrast, structured silhouettes, and vivid electric magenta rim lighting.
+        </p>
+
+        <div class="result-actions">
+          <a href="shop.html" class="btn-shop-mood">Shop Your Mood &rarr;</a>
+          <button class="btn-share-mood" id="btn-share-mood">Save / Share Mood</button>
+        </div>
+      </section>
+
+      <!-- Curated Product Capsule Lookbook -->
+      <section class="capsule-section">
+        <h2 class="capsule-title">Your Curated Mood Capsule</h2>
+        <div class="capsule-grid" id="capsule-grid">
+          <!-- Dynamically populated by js/mood-finder.js -->
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+
+  <script src="js/cart.js"></script>
+  <script src="js/mood-finder.js"></script>
+  <script src="js/nav-mobile.js"></script>
+</body>
+</html>

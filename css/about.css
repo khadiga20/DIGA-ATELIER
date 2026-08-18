@@ -1,0 +1,435 @@
+/* ==========================================
+   DIGA — About / Manifesto Stylesheet
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&display=swap');
+
+:root {
+  --bg-color: #060508;
+  --bg-surface: #0e0c12;
+  --text-main: #f5f2eb;
+  --text-muted: #9c97a4;
+  --text-dim: #5c5764;
+  --cream: #f4efe6;
+  --off-white: #faf7f2;
+
+  --accent-color: #7A22C4;
+  --accent-secondary: #E0247D;
+  --accent-glow: rgba(122, 34, 196, 0.4);
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Barlow Condensed', -apple-system, sans-serif;
+  --container-padding: clamp(1.5rem, 6vw, 7rem);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header Nav */
+.about-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  padding: 0 var(--container-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: rgba(6, 5, 8, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.brand-mini {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.25em;
+  color: var(--text-main);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+}
+
+.brand-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-secondary);
+  box-shadow: 0 0 10px var(--accent-secondary);
+}
+
+.about-nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.about-nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.about-nav-links a:hover,
+.about-nav-links a.active {
+  color: var(--off-white);
+}
+
+/* ==========================================
+   SECTION 1: OPENING MANIFESTO HERO
+   ========================================== */
+.manifesto-opening-hero {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 8rem var(--container-padding);
+  background-color: #030204;
+}
+
+.opening-subtitle {
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  margin-bottom: 2.5rem;
+  display: block;
+}
+
+.opening-manifesto-text {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6.5vw, 6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--off-white);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.reveal-word {
+  display: inline-block;
+  opacity: 0.15;
+  transform: translateY(20px);
+  filter: blur(4px);
+  transition: opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
+}
+
+.reveal-word.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.reveal-word.highlight {
+  color: var(--cream);
+  font-style: italic;
+}
+
+/* ==========================================
+   SECTION 2: BRAND ORIGIN (SPLIT SCREEN)
+   ========================================== */
+.origin-section {
+  padding: 10rem var(--container-padding);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.origin-media-col {
+  position: relative;
+  height: 650px;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+}
+
+.origin-img-breathing {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: gentle-drift 20s infinite alternate ease-in-out;
+}
+
+@keyframes gentle-drift {
+  0% { transform: scale(1); filter: contrast(105%); }
+  100% { transform: scale(1.1) translate(-1%, -1%); filter: contrast(115%); }
+}
+
+.origin-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+}
+
+.origin-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  color: var(--off-white);
+  line-height: 1.2;
+}
+
+.origin-paragraph {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+/* ==========================================
+   SECTION 3: PHILOSOPHY PILLARS
+   ========================================== */
+.pillars-container {
+  padding: 6rem 0;
+}
+
+.pillar-card {
+  position: relative;
+  padding: 8rem var(--container-padding);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  transition: background-color 1s ease;
+}
+
+/* Light Bleed Moment Overlay */
+.pillar-light-bleed {
+  position: absolute;
+  top: 50%;
+  left: -20%;
+  transform: translateY(-50%);
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--pillar-accent, rgba(122,34,196,0.35)) 0%, transparent 70%);
+  filter: blur(100px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
+}
+
+.pillar-card.active .pillar-light-bleed {
+  opacity: 1;
+}
+
+.pillar-content-wrap {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pillar-num {
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.pillar-title {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--off-white);
+  line-height: 0.95;
+  margin-bottom: 2rem;
+}
+
+.pillar-statement {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: var(--cream);
+  max-width: 750px;
+  line-height: 1.5;
+}
+
+/* Individual Pillar Accent Colors */
+.pillar-card[data-pillar="01"] { --pillar-accent: rgba(122, 34, 196, 0.4); }
+.pillar-card[data-pillar="02"] { --pillar-accent: rgba(224, 36, 125, 0.4); }
+.pillar-card[data-pillar="03"] { --pillar-accent: rgba(83, 109, 254, 0.4); }
+
+/* ==========================================
+   SECTION 4: PROCESS & CRAFT EDITORIAL
+   ========================================== */
+.process-section {
+  padding: 10rem var(--container-padding);
+  background: #030204;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.process-header {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto 5rem;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.process-card {
+  position: relative;
+  height: 480px;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.process-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(25%) contrast(108%);
+  transition: transform 0.8s ease, filter 0.8s ease;
+}
+
+.process-card:hover .process-card-img {
+  transform: scale(1.06);
+  filter: grayscale(0%) contrast(115%);
+}
+
+.process-card-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem 1.5rem 1.5rem;
+  background: linear-gradient(0deg, rgba(6,5,8,0.95) 0%, transparent 100%);
+  color: var(--off-white);
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+}
+
+/* ==========================================
+   SECTION 5: CLOSING MANIFESTO & CTA
+   ========================================== */
+.closing-manifesto-section {
+  padding: 12rem var(--container-padding) 8rem;
+  text-align: center;
+  position: relative;
+  background: #020103;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.closing-tagline {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 10vw, 9rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--off-white);
+  letter-spacing: -0.02em;
+  margin-bottom: 3.5rem;
+  opacity: 0;
+  filter: blur(12px);
+  transform: scale(0.96);
+  transition: opacity 1.4s ease, filter 1.4s ease, transform 1.4s ease;
+}
+
+.closing-tagline.in-view {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+
+.about-cta-group {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn-about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.1rem 2.5rem;
+  background: var(--off-white);
+  color: #060508;
+  border-radius: 40px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.btn-about-cta:hover {
+  background: var(--accent-secondary);
+  color: #fff;
+  box-shadow: 0 10px 35px var(--accent-glow-intense);
+  transform: translateY(-3px);
+}
+
+.btn-about-cta.secondary {
+  background: transparent;
+  color: var(--off-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-about-cta.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--off-white);
+}
+
+/* Responsive Rules */
+@media (max-width: 900px) {
+  .origin-section {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .origin-media-col {
+    height: 400px;
+  }
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+  .process-card {
+    height: 380px;
+  }
+}
